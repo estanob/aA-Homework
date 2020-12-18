@@ -23,19 +23,35 @@
 
 def find_angelina
   #find Angelina Jolie by name in the actors table
-
+  Actor.find_by(name: 'Angelina Jolie')
 end
 
 def top_titles
   # get movie titles from movies with scores greater than or equal to 9
   # hint: use 'select' and 'where'
+  Movie.find_by_sql(<<-SQL)
+    SELECT
+      id, title
+    FROM
+      movies
+    WHERE
+      score >= 9;
+  SQL
 
 end
 
 def star_wars
   #display the id, title and year of each Star Wars movie in movies.
   # hint: use 'select' and 'where'
-
+  Movie.find_by_sql(<<-SQL)
+  SELECT
+    id, title, yr
+  FROM
+    movies
+  WHERE
+    title LIKE 'Star Wars%';
+  SQL
+  
 end
 
 
@@ -44,7 +60,14 @@ def below_average_years
   #with the count of movies scoring under 5 aliased as bad_movies,
   #in descending order
   # hint: use 'select', 'where', 'group', 'order'
+  Movie.find_by_sql(<<-SQL)
+    SELECT
+      id, yr, COUNT()
 
+    FROM
+
+    WHERE
+  SQL
 end
 
 def alphabetized_actors
