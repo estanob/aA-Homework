@@ -86,3 +86,64 @@ function fizzBuzz(arr){
 
 
 
+// function isPrime(num){
+//   if (num < 2){
+//     return false;
+//   }
+//   for (let i = 2; i < num; i++){
+//     if (num % i === 0){
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+
+// console.log(isPrime(2))
+// // true
+
+// console.log(isPrime(10))
+// // false
+
+// console.log(isPrime(15485863))
+// // true
+
+// console.log(isPrime(3548563))
+// // false
+
+
+
+function sumOfNPrimes(n){
+  
+  if (n === 0){
+    return 0;
+  }
+  
+  let primes = [];
+  while (primes.length < n){
+    let i = 2;
+    if (isPrime(i)){
+      primes.push(i)
+    }
+    i++;
+  };
+  return primes
+  // return primes.reduce((a,b) => a + b, 0)
+
+  function isPrime(num) {
+    if (num < 2) {
+      return false;
+    }
+    for (let i = 2; i < num; i++) {
+      if (num % i === 0) {
+        return false;
+      }
+    }
+    return true;
+  };
+};
+
+console.log(sumOfNPrimes(0));
+
+console.log(sumOfNPrimes(1));
+
+console.log(sumOfNPrimes(4));
