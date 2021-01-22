@@ -61,12 +61,16 @@ def below_average_years
   #in descending order
   # hint: use 'select', 'where', 'group', 'order'
   Movie.find_by_sql(<<-SQL)
-    SELECT
-      id, yr, COUNT()
-
+    SELECT COUNT(CASE WHEN score < 5 THEN 1 ELSE 0 END) AS bad_movies
+      id, yr, bad_movies
     FROM
-
+      movies
     WHERE
+      score < 5
+    GROUP BY
+      movies.yr
+    ORDER BY 
+      bad_movies DESC;
   SQL
 end
 
@@ -76,7 +80,16 @@ def alphabetized_actors
   # Note: Ubuntu users may find that special characters
   # are alphabetized differently than the specs.
   # This spec might fail for Ubuntu users. It's ok!
-
+  Actor.find_by_sql(<<-SQL)
+    SELECT
+      *
+    FROM
+      actors
+    ORDER BY
+      name ASC
+    LIMIT
+      10;
+  SQL
 end
 
 def pulp_fiction_actors
@@ -91,5 +104,11 @@ def uma_movies
   # display the id, title, and year of movies Uma Thurman has acted in
   # order them by ascending year
   # hint: use 'select', 'joins', 'where', and 'order'
-
+  Casting.find_by_sql(<<-SQL)
+    SELECT movie_id
+    FROM
+      castings
+    WHERE
+      castings.movie_id = movies.id
+  SQL
 end
