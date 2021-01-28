@@ -4,5 +4,4 @@ const selectLocation = (city, jobs) => ({
   jobs
 });
 
-
 export default selectLocation;

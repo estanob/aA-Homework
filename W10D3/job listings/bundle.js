@@ -308,8 +308,18 @@ var initialState = {
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
 
   switch (action.type) {
+    case "SWITCH_LOCATION":
+      var nextState = Object.assign({}, state);
+      var location = {
+        city: action.city,
+        jobs: action.jobs
+      };
+      nextState[action.location] = location;
+      return nextState;
+
     default:
       return state;
   }
@@ -330,6 +340,8 @@ var reducer = function reducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/index.js");
 /* harmony import */ var _reducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer.js */ "./frontend/reducer.js");
+/* harmony import */ var _actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions.js */ "./frontend/actions.js");
+
 
 
 var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
