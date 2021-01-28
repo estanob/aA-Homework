@@ -1,7 +1,7 @@
 const selectLocation = (city, jobs) => ({
   type: "SWITCH_LOCATION",
   city,
-  jobs
+  jobs,
 });
 
 export default selectLocation;
